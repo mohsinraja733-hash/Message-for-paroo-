@@ -3,136 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For You ❤️</title>
+<title>For You 💖</title>
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    font-family:system-ui,sans-serif;
-    background:linear-gradient(-45deg,#ff416c,#ff4b2b,#ff758c,#ffb347);
-    background-size:400% 400%;
-    animation:bg 8s ease infinite;
-}
-@keyframes bg{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: "Segoe UI", system-ui, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-h1{
-    color:white;
-    font-size:clamp(28px,8vw,48px);
-    text-shadow:0 0 20px #fff;
-    z-index:5;
-}
+    .card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 24px;
+        margin: 16px;
+        border-radius: 20px;
+        max-width: 420px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        animation: fadeIn 1.5s ease;
+    }
 
-#secret{
-    display:none;
-    font-size:32px;
-    margin-top:15px;
-    animation:fadeIn 1s forwards;
-}
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-@keyframes fadeIn{
-    from{opacity:0;transform:scale(0.8)}
-    to{opacity:1;transform:scale(1)}
-}
+    h1 {
+        text-align: center;
+        color: #ff4d6d;
+        margin-bottom: 12px;
+    }
 
-.float,.confetti,.firework{
-    position:absolute;
-    pointer-events:none;
-}
+    p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #333;
+        margin-bottom: 14px;
+    }
 
-@keyframes floatUp{
-    from{transform:translateY(100vh);opacity:1}
-    to{transform:translateY(-10vh);opacity:0}
-}
+    .heart {
+        text-align: center;
+        font-size: 28px;
+        animation: beat 1.5s infinite;
+    }
 
-@keyframes pop{
-    from{transform:scale(0);opacity:1}
-    to{transform:scale(3);opacity:0}
-}
+    @keyframes beat {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
 </style>
 </head>
 
 <body>
 
-<div>
-    <h1 id="typing"></h1>
-    <div id="secret">Thank you ❤️</div>
+<div class="card">
+    <h1>💖 For You 💖</h1>
+
+    <p>
+        Tum mere liye bohat special ho… itni special ke shayad lafzon mein poori tarah bayan bhi na ho paaye 💖  
+        Subah aankh khulti hai to sab se pehla khayal tumhara hota hai, aur raat ko sone se pehle bhi zehan mein sirf tum hi hoti ho 🙃
+    </p>
+
+    <p>
+        Tumhara ek message, tumse thori si baat, aur chehre par wo muskurahat aa jaati hai jo waise aksar nahi aati…  
+        Sach kahun to mujhe tumse baat karna bohat pasand hai 🫶  
+        Mera mood tumse juda hua hai — tum khush hoti ho to main khush hota hoon, tum down hoti ho to mera dil bhi heavy ho jata hai 💖
+    </p>
+
+    <p>
+        Is se zyada main shayad explain na kar paun, kyun ke is ehsaas ke liye mere paas poore lafz hi nahi hain…  
+        Bas itna samajh lo ke tum mere liye kya ho 💖  
+        Main sirf tumhein khush dekhna chahta hoon, hamesha 🙂💖
+    </p>
+
+    <p>
+        Aur haan… agar kabhi meri koi baat buri lag jaaye, ya gussa aaye, to please mujhe bata diya karna.  
+        Mujhe manane mein chahe poora din lag jaaye, main poori koshish karunga 🥺💖  
+        Bas itna wada karo ke baat band nahi karogi, muh nahi morogi… kyun ke tumse baat na ho to sab adhoora lagta hai 💖
+    </p>
+
+    <div class="heart">❤️</div>
 </div>
-
-<audio id="bgm" loop>
- <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-/* NAME TYPING EFFECT */
-const text="oyyy parooo shahzadii ❤️";
-let i=0;
-function type(){
-    if(i<text.length){
-        document.getElementById("typing").textContent+=text.charAt(i);
-        i++;
-        setTimeout(type,120);
-    }
-}
-type();
-
-/* FLOATING HEARTS + SPARKLES */
-function floatEmoji(e){
-    const el=document.createElement("div");
-    el.className="float";
-    el.textContent=e;
-    el.style.left=Math.random()*100+"vw";
-    el.style.fontSize=20+Math.random()*25+"px";
-    el.style.animation=`floatUp ${4+Math.random()*3}s linear`;
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),7000);
-}
-setInterval(()=>floatEmoji("❤️"),350);
-setInterval(()=>floatEmoji("✨"),600);
-
-/* TAP INTERACTION */
-let started=false;
-document.body.addEventListener("click",(e)=>{
-    if(!started){
-        document.getElementById("bgm").play();
-        started=true;
-        setTimeout(()=>document.getElementById("secret").style.display="block",2000);
-    }
-
-    if(navigator.vibrate) navigator.vibrate(120);
-
-    /* CONFETTI */
-    for(let j=0;j<15;j++){
-        const c=document.createElement("div");
-        c.className="confetti";
-        c.textContent="🎉";
-        c.style.left=e.clientX+"px";
-        c.style.top=e.clientY+"px";
-        c.style.animation=`pop 1s ease-out`;
-        document.body.appendChild(c);
-        setTimeout(()=>c.remove(),1000);
-    }
-
-    /* FIREWORK */
-    const f=document.createElement("div");
-    f.className="firework";
-    f.textContent="🎆";
-    f.style.left=e.clientX+"px";
-    f.style.top=e.clientY+"px";
-    f.style.animation=`pop 1.5s ease-out`;
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),1500);
-});
-</script>
 
 </body>
 </html>
